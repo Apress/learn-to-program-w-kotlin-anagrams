@@ -1,0 +1,380 @@
+Project Step 11.1:
+val path = Paths.get("src/test/resources/books/FiveWords.txt")
+val dictionary = Dictionary(path)
+
+
+Project Step 11.2:
+Assert.assertTrue(dictionary.contains("aardvark"));
+
+Project Step 11.3:
+Assert.assertFalse(dictionary.contains("aardwolf"));
+Assert.assertFalse(dictionary.contains("zebra"));
+
+
+After Project Step 11.3:
+@Test
+fun containsTest() {
+    val path = Paths.get("src/test/resources/books/FiveWords.txt")
+    val dictionary = Dictionary(path)
+    Assert.assertTrue(dictionary.contains("aardvark"))
+    Assert.assertTrue(dictionary.contains("bat"))
+    Assert.assertTrue(dictionary.contains("cat"))
+    Assert.assertTrue(dictionary.contains("dog"))
+    Assert.assertTrue(dictionary.contains("eel"))
+
+    Assert.assertFalse(dictionary.contains("aardwolf"))
+    Assert.assertFalse(dictionary.contains("zebra"))
+}
+
+Project Step 11.5:
+fun contains(string: String): Boolean {
+    return words.contains(string)
+}
+
+After Project Step 11.6:
+package pfb.anagrams
+
+import java.nio.file.Files
+import java.nio.file.Path
+
+/**
+ * Checks words against a list of words read
+ * from a file in which there is one word per line.
+ */
+class Dictionary(pathToFile: Path) {
+
+    val words = mutableSetOf<String>()
+
+    init {
+        val lines = Files.readAllLines(pathToFile)
+        for (line in lines) {
+            words.add(line)
+        }
+    }
+    fun contains(string: String): Boolean {
+        return words.contains(string)
+    }
+}
+
+
+Project Step 11.7:
+@Test
+fun equalsTest() {
+    val cat = Term("cat")
+    val feline = Term("cat")
+    val dog = Term("dog")
+    Assert.assertTrue(cat == feline)
+    Assert.assertFalse(cat == dog)
+}
+
+
+Project Step 11.8:
+@Test
+fun permutationsAB() {
+    val ab = Term("ab")
+    val permutations = ab.permutations()
+    Assert.assertEquals(2, permutations.size)
+    Assert.assertTrue(permutations.contains(Term("ab")))
+    Assert.assertTrue(permutations.contains(Term("ba")))
+}
+
+
+Project Step 11.11:
+@Test
+fun permutationsA() {
+    val ab = Term("a")
+    val permutations = ab.permutations()
+    Assert.assertEquals(1, permutations.size)
+    Assert.assertTrue(permutations.contains(Term("a")))
+}
+
+
+Project Step 11.12:
+@Test fun permutationsWhenEmpty() {
+    val empty = Term("")
+    val permutations = empty.permutations()
+    Assert.assertEquals(1, permutations.size)
+    Assert.assertTrue(permutations.contains(Term("")))
+}
+
+
+After Project Step 11.12:
+package pfb.anagrams.test
+
+import org.junit.Assert
+import org.junit.Test
+import pfb.anagrams.Term
+
+class TermTest {
+    @Test
+    fun equalsTest() {
+        val cat = Term("cat")
+        val feline = Term("cat")
+        val dog = Term("dog")
+        Assert.assertTrue(cat == feline)
+        Assert.assertFalse(cat == dog)
+    }
+
+    @Test fun permutationsWhenEmpty() {
+        val empty = Term("")
+        val permutations = empty.permutations()
+        Assert.assertEquals(1, permutations.size)
+        Assert.assertTrue(permutations.contains(Term("")))
+    }
+
+    @Test
+    fun permutationsA() {
+        val ab = Term("a")
+        val permutations = ab.permutations()
+        Assert.assertEquals(1, permutations.size)
+        Assert.assertTrue(permutations.contains(Term("a")))
+    }
+
+    @Test
+    fun permutationsAB() {
+        val ab = Term("ab")
+        val permutations = ab.permutations()
+        Assert.assertEquals(2, permutations.size)
+        Assert.assertTrue(permutations.contains(Term("ab")))
+        Assert.assertTrue(permutations.contains(Term("ba")))
+    }
+
+    @Test
+    fun permutationsABC() {
+        val ab = Term("abc")
+        val permutations = ab.permutations()
+        Assert.assertEquals(6, permutations.size.toLong())
+        Assert.assertTrue(permutations.contains(Term("abc")))
+        Assert.assertTrue(permutations.contains(Term("acb")))
+        Assert.assertTrue(permutations.contains(Term("bac")))
+        Assert.assertTrue(permutations.contains(Term("bca")))
+        Assert.assertTrue(permutations.contains(Term("cab")))
+        Assert.assertTrue(permutations.contains(Term("cba")))
+    }
+
+    @Test
+    fun permutationsAAB() {
+        val ab = Term("aab")
+        val permutations = ab.permutations()
+        Assert.assertEquals(3, permutations.size.toLong())
+        Assert.assertTrue(permutations.contains(Term("aab")))
+        Assert.assertTrue(permutations.contains(Term("aba")))
+        Assert.assertTrue(permutations.contains(Term("baa")))
+    }
+}
+
+
+Project Step 11.14:
+fun tail(): Term {
+    return Term("")
+}
+
+Project Step 11.15:
+@Test
+fun tailEmpty() {
+    val empty = Term("")
+    Assert.assertEquals(empty, empty.tail())
+}
+
+Project Step 11.16:
+@Test
+fun tailOne() {
+    val a = Term("a")
+    Assert.assertEquals(Term(""), a.tail())
+}
+
+
+Project Step 11.17:
+@Test
+fun tailTest() {
+    val anaconda = Term("anaconda")
+    Assert.assertEquals(Term("naconda"), anaconda.tail())
+}
+
+Project Step 11.18:
+fun tail(): Term {
+    if (text == "") {
+        return Term("")
+    }
+    return Term(text.substring(1))
+}
+
+Project Step 11.19:
+fun insert(newChar: Char, position: Int): Term {
+    return Term("")
+}
+
+Project Step 11.20:
+@Test
+fun insertIntoEmpty() {
+    val empty = Term("")
+    Assert.assertEquals(Term("a"), empty.insert('a', 0))
+}
+
+Project Step 11.21:
+@Test
+fun insertIntoLengthOneTerm() {
+    val x = Term("x")
+    Assert.assertEquals(Term("ax"), x.insert('a', 0))
+    Assert.assertEquals(Term("xa"), x.insert('a', 1))
+}
+
+Project Step 11.22:
+@Test
+fun insertTest() {
+    val x = Term("xy")
+    Assert.assertEquals(Term("axy"), x.insert('a', 0))
+    Assert.assertEquals(Term("xay"), x.insert('a', 1))
+    Assert.assertEquals(Term("xya"), x.insert('a', 2))
+}
+
+Project Step 11.23:
+fun insert(newChar: Char, position: Int): Term {
+    val before = text.substring(0, position)
+    val after = text.substring(position)
+    return Term(before + newChar + after)
+}
+
+
+Project Step 11.24:
+fun permutations(): Set<Term> {
+    //Create a result set to which the permutations will be added.
+
+    //If the Term has length 0 or 1, then the Term itself is
+    //the only permutation,
+    //so add it to the result and return.
+
+    //At this point we know that the length is at least two.
+    //Break the Term into a single Char, the head,
+    //and a Term that is one Char shorter, the tail.
+
+    //Apply recursion to get the permutations of the tail.
+
+    //For each possible insertion position,
+
+    //for each Term in the permutations of the tail,
+
+    //create a new Term by inserting
+    //the head Char at the position,
+
+    //and add this to the result.
+
+    //Return the result.
+}
+
+Project Step 11.26:
+if (text.length <= 1) {
+
+}
+
+also in Project Step 11.26:
+result.add(this)
+return result
+
+After Project Step 11.29:
+fun permutations(): Set<Term> {
+    //Create a result set to which the permutations will be added.
+    val result = mutableSetOf<Term>()
+    //If the Term has length 0 or 1, then the Term itself is
+    //the only permutation,
+    //so add it to the result and return.
+    if (text.length <= 1) {
+        result.add(this)
+        return result
+    }
+    //At this point we know that the length is at least two.
+    //Break the Term into a single Char, the head,
+    //and a Term that is one Char shorter, the tail.
+    val head = text[0]
+    val tail = tail()
+    //Apply recursion to get the permutations of the tail.
+    val tailPermuations = tail.permutations()
+    //For each possible insertion position,
+
+    //for each Term in the permutations of the tail,
+
+    //create a new Term by inserting
+    //the head Char at the position,
+
+    //and add this to the result.
+
+    //Return the result.
+    return result
+}
+
+
+Project Step 11.30:
+for (i in 0..text.length - 1) {
+
+Project Step 11.31:
+for (tailPermutation in tailPermuations) {
+
+After Project Step 11.31:
+fun permutations(): Set<Term> {
+    //Create a result set to which the permutations will be added.
+    val result = mutableSetOf<Term>()
+    //If the Term has length 0 or 1, then the Term itself is
+    //the only permutation,
+    //so add it to the result and return.
+    if (text.length <= 1) {
+        result.add(this)
+        return result
+    }
+    //At this point we know that the length is at least two.
+    //Break the Term into a single Char, the head,
+    //and a Term that is one Char shorter, the tail.
+    val head = text[0]
+    val tail = tail()
+    //Apply recursion to get the permutations of the tail.
+    val tailPermuations = tail.permutations()
+    //For each possible insertion position,
+    for (i in 0..text.length - 1) {
+        //for each Term in the permutations of the tail,
+        for (tailPermutation in tailPermuations) {
+            //create a new Term by inserting
+            //the head Char at the position,
+
+            //and add this to the result.
+
+        }
+    }
+    //Return the result.
+    return result
+}
+
+
+Project Step 11.33:
+val path = Paths.get("src/main/resources/books/english.txt")
+val dictionary = Dictionary(path)
+
+Project Step 11.34:
+val word = Term("regal")
+
+Project Step 11.35:
+val anagrams = word.permutations()
+
+After Project Step 11.38:
+package pfb.anagrams
+
+import java.nio.file.Paths
+
+/**
+ * Finds and prints the anagrams of a word.
+ */
+fun main() {
+    //Create a dictionary from "english.txt" in resources/books
+    val path = Paths.get("src/main/resources/books/english.txt")
+    val dictionary = Dictionary(path)
+    //Create a Term from our initial English word.
+    val word = Term("regal")
+    //Get all rearrangements of the letters in this word.
+    val anagrams = word.permutations()
+    //For each of these,
+    for (w in anagrams) {
+        //...if it is in the dictionary
+        if (dictionary.contains(w.text)) {
+            //...print it.
+            println(w)
+        }
+    }
+}
