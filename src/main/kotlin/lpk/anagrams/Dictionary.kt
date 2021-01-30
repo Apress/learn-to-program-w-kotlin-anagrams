@@ -9,15 +9,7 @@ import java.nio.file.Path
  */
 class Dictionary(pathToFile: Path) {
 
-    val words = mutableSetOf<String>()
-    init {
-        val lines = Files.readAllLines(pathToFile)
-        for (line in lines) {
-            words.add(line)
-        }
-    }
     fun contains(string: String): Boolean {
-        return words.contains(string)
+        return false
     }
-
 }
