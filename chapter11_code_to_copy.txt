@@ -32,7 +32,7 @@ fun contains(string: String): Boolean {
 }
 
 After Project Step 11.6:
-package pfb.anagrams
+package lpk.anagrams
 
 import java.nio.file.Files
 import java.nio.file.Path
@@ -99,11 +99,11 @@ Project Step 11.12:
 
 
 After Project Step 11.12:
-package pfb.anagrams.test
+package lpk.anagrams.test
 
 import org.junit.Assert
 import org.junit.Test
-import pfb.anagrams.Term
+import lpk.anagrams.Term
 
 class TermTest {
     @Test
@@ -431,7 +431,7 @@ and at line 19:
 }
 
 After Project Step 11.38:
-package pfb.anagrams
+package lpk.anagrams
 
 import java.nio.file.Paths
 
