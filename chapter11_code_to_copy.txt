@@ -371,6 +371,40 @@ fun permutations(): Set<Term> {
     return result
 }
 
+After Project Step 11.32:
+fun permutations(): Set<Term> {
+    //Create a result set to which the permutations will be added.
+    val result = mutableSetOf<Term>()
+    //If the Term has length 0 or 1, then the Term itself is
+    //the only permutation,
+    //so add it to the result and return.
+    if (text.length <= 1) {
+        result.add(this)
+        return result
+    }
+    //At this point we know that the length is at least two.
+    //Break the Term into a single Char, the head,
+    //and a Term that is one Char shorter, the tail.
+    val head = text[0]
+    val tail = tail()
+    //Apply recursion to get the permutations of the tail.
+    val tailPermuations = tail.permutations()
+    //For each possible insertion position,
+    for (i in 0..text.length - 1) {
+
+        //for each Term in the permutations of the tail,
+        for (tailPermutation in tailPermuations) {
+            //create a new Term by inserting
+            //the head Char at the position,
+            val newTerm = tailPermutation.insert(head, i)
+            //and add this to the result.
+            result.add(newTerm)
+        }
+    }
+    //Return the result.
+    return result
+}
+
 
 Project Step 11.33:
 val path = Paths.get("src/main/resources/books/english.txt")
