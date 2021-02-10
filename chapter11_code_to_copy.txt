@@ -416,6 +416,20 @@ val word = Term("regal")
 Project Step 11.35:
 val anagrams = word.permutations()
 
+Project Step 11.36:
+Line 16:
+for (w in anagrams) {
+
+After line 19:
+}
+
+
+Project Step 11.37:
+if (dictionary.contains(w.text)) {
+
+and at line 19:
+}
+
 After Project Step 11.38:
 package pfb.anagrams
 
