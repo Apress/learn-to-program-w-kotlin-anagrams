@@ -262,6 +262,35 @@ fun permutations(): Set<Term> {
     //Return the result.
 }
 
+Project Step 11.25:
+fun permutations(): Set<Term> {
+    //Create a result set to which the permutations will be added.
+    val result = mutableSetOf<Term>()
+
+    //If the Term has length 0 or 1, then the Term itself is
+    //the only permutation,
+    //so add it to the result and return.
+
+    //At this point we know that the length is at least two.
+    //Break the Term into a single Char, the head,
+    //and a Term that is one Char shorter, the tail.
+
+    //Apply recursion to get the permutations of the tail.
+
+    //For each possible insertion position,
+
+    //for each Term in the permutations of the tail,
+
+    //create a new Term by inserting
+    //the head Char at the position,
+
+    //and add this to the result.
+
+    //Return the result.
+    return result
+}
+
+
 Project Step 11.26:
 if (text.length <= 1) {
 
